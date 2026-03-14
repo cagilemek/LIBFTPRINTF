@@ -1,8 +1,10 @@
-int	ft_hex_putnbr(unsigned int k)
+#include "ft_printf.h"
+
+int ft_hex_putnbr(unsigned long k)
 {
-	char	*base;
-	int		count;
-	int		check;
+	char *base;
+	int count;
+	int check;
 
 	base = "0123456789abcdef";
 	count = 0;

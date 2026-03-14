@@ -1,7 +1,9 @@
-int	ft_uns_putnbr(unsigned int b)
+#include "ft_printf.h"
+
+int ft_uns_putnbr(unsigned int b)
 {
-	int	count;
-	int	check;
+	int count;
+	int check;
 
 	count = 0;
 	if (b >= 10)

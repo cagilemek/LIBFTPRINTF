@@ -1,3 +1,5 @@
+#include "ft_printf.h"
+
 int ft_putnbr(long n)
 {
 	int count;

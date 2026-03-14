@@ -1,3 +1,5 @@
+#include "ft_printf.h"
+
 int ft_uphex_putnbr(unsigned int k)
 {
     char *base;

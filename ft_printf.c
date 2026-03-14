@@ -12,32 +12,27 @@
 
 #include "ft_printf.h"
 #include <stdarg.h>
+#include <unistd.h>
 
 static int ft_format(char f, va_list args)
 {
 	if (f == 'c')
-		return ft_putchar(va_arg(args, int));
+		return (ft_putchar(va_arg(args, int)));
 	if (f == 's')
-		return ft_putstr(va_arg(args, char *));
+		return (ft_putstr(va_arg(args, char *)));
 	if (f == 'p')
-		return ft_address(va_arg(args, void *));
+		return (ft_address(va_arg(args, void *)));
 	if (f == 'd' || f == 'i')
-	{
-		ft_putnbr(va_arg(args, int));
-		return 0;
-	}
+		return (ft_putnbr(va_arg(args, int))); // return ekledik
 	if (f == 'u')
-		return ft_uns_putnbr(va_arg(args, unsigned int));
+		return (ft_uns_putnbr(va_arg(args, unsigned int)));
 	if (f == 'x')
-	{
-		ft_hex_putnbr(va_arg(args, unsigned int));
-		return 0;
-	}
+		return (ft_hex_putnbr(va_arg(args, unsigned int))); // return ekledik
 	if (f == 'X')
-		return ft_uphex_putnbr(va_arg(args, unsigned int));
+		return (ft_uphex_putnbr(va_arg(args, unsigned int)));
 	if (f == '%')
-		return ft_putchar('%');
-	return -2;
+		return (ft_putchar('%'));
+	return (-1); // Standart hata için -1 daha iyidir
 }
 
 int ft_printf(const char *fmt, ...)
