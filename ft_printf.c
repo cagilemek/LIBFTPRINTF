@@ -10,132 +10,57 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
+#include "ft_printf.h"
 #include <stdarg.h>
-#include <unistd.h>
 
-int ft_putchar (int c)
+static int ft_format(char f, va_list args)
 {
-	write(1, &c, 1);
-	return 1;
-}
-
-void ft_putnbr (int n)
-{
-	if(n<0)
+	if (f == 'c')
+		return ft_putchar(va_arg(args, int));
+	if (f == 's')
+		return ft_putstr(va_arg(args, char *));
+	if (f == 'p')
+		return ft_address(va_arg(args, void *));
+	if (f == 'd' || f == 'i')
 	{
-		ft_putchar('-');
-		n = -n;
+		ft_putnbr(va_arg(args, int));
+		return 0;
 	}
-	if(n>=10)
+	if (f == 'u')
+		return ft_uns_putnbr(va_arg(args, unsigned int));
+	if (f == 'x')
 	{
-		ft_putnbr(n/10);
+		ft_hex_putnbr(va_arg(args, unsigned int));
+		return 0;
 	}
-	ft_putchar(n % 10 + '0');
+	if (f == 'X')
+		return ft_uphex_putnbr(va_arg(args, unsigned int));
+	if (f == '%')
+		return ft_putchar('%');
+	return -2;
 }
 
-void ft_uns_putnbr(int b)
+int ft_printf(const char *fmt, ...)
 {
-	if (b >= 10)
-		ft_uns_putnbr(b / 10);
-	ft_putchar(b % 10 + '0');
-}
+	va_list args;
+	int count;
+	int tmp;
 
-void ft_hex_putnbr (int k)
-{
-	char *base = "0123456789abcdef";
-
-	if(k >= 16)
-		ft_hex_putnbr(k / 16);
-	ft_putchar(base[k % 16]);
-}
-
-void ft_uphex_putnbr (int k)
-{
-	char *base = "0123456789ABCDEF";
-
-	if(k >= 16)
-		ft_uphex_putnbr(k / 16);
-	ft_putchar(base[k % 16]);
-}
-
-
-int ft_printf(const char *format, ...)
-{
-	int a;
-	va_list ar;
-
-	va_start(ar, format);
-
-	while (*format)
+	va_start(args, fmt);
+	count = 0;
+	while (*fmt)
 	{
-		if(*format == '%')
+		if (*fmt == '%')
 		{
-			format++;
-			{
-				if (*format == 'd' || *format == 'i')
-				{
-					a = va_arg(ar, int); // argümanı al
-					ft_putnbr(a);         // ekrana yaz
-				}
-				else if (*format == 'c')
-				{
-					a = va_arg(ar, int);
-					ft_putchar(a);
-				}
-				else if (*format == 's')
-				{
-					char *string;
-					string = va_arg(ar, char *);
-					while (*string)
-					{
-						ft_putchar (*string);
-						string++;
-					}
-				}
-				else if (*format == 'u')
-				{
-					unsigned int b;
-					b = va_arg(ar, unsigned int);
-					ft_uns_putnbr(b);
-				}
-				else if(*format == 'x')
-				{
-					unsigned int m;
-					m = va_arg(ar, unsigned int);
-					ft_hex_putnbr(m);
-				}
-				else if (*format == 'X')
-				{
-					unsigned int h;
-					h = va_arg(ar, unsigned int);
-					ft_uphex_putnbr(h);
-				}
-				else if (*format == '%')
-				{
-					int a;
-					a = '%';
-					ft_putchar(a);
-				}
-				else if(*format == 'p')
-				{
-					
-				}
-				format++;
-			}
+			fmt++;
+			tmp = ft_format(*fmt, args);
+			if (tmp >= 0)
+				count += tmp;
 		}
 		else
-		{
-			ft_putchar(*format);
-			format++;
-		}
+			count += ft_putchar(*fmt);
+		fmt++;
 	}
-
-	va_end(ar);
-	return 0;
-}
-int main()
-{
-	int *p = NULL;
-	ft_printf("%d", ft_printf("merhaba"));
+	va_end(args);
+	return count;
 }
