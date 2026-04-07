@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckurtul <ckurtul@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:58:55 by ckurtul           #+#    #+#             */
+/*   Updated: 2026/04/07 18:58:55 by ckurtul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_putnbr(long n)
+int	ft_putnbr(long n)
 {
-	int count;
-	int check;
+	int	count;
+	int	check;
 
 	count = 0;
 	if (n < 0)

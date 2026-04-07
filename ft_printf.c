@@ -14,7 +14,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-static int ft_format(char f, va_list args)
+static int	ft_format(char f, va_list args)
 {
 	if (f == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -23,25 +23,25 @@ static int ft_format(char f, va_list args)
 	if (f == 'p')
 		return (ft_address(va_arg(args, void *)));
 	if (f == 'd' || f == 'i')
-		return (ft_putnbr(va_arg(args, int))); // return ekledik
+		return (ft_putnbr(va_arg(args, int)));
 	if (f == 'u')
 		return (ft_uns_putnbr(va_arg(args, unsigned int)));
 	if (f == 'x')
-		return (ft_hex_putnbr(va_arg(args, unsigned int))); // return ekledik
+		return (ft_hex_putnbr(va_arg(args, unsigned int)));
 	if (f == 'X')
 		return (ft_uphex_putnbr(va_arg(args, unsigned int)));
 	if (f == '%')
 		return (ft_putchar('%'));
-	return (-1); // Standart hata için -1 daha iyidir
+	return (-1);
 }
 
-int ft_printf(const char *fmt, ...)
+int	ft_printf(const char *fmt, ...)
 {
-	va_list args;
-	int count;
-	int tmp;
+	va_list	args;
+	int		count;
+	int		tmp;
 
-	va_start(args, fmt);
+	va_start (args, fmt);
 	count = 0;
 	while (*fmt)
 	{
@@ -57,5 +57,5 @@ int ft_printf(const char *fmt, ...)
 		fmt++;
 	}
 	va_end(args);
-	return count;
+	return (count);
 }

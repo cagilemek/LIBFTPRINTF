@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_uns_putnbr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckurtul <ckurtul@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 19:14:37 by ckurtul           #+#    #+#             */
+/*   Updated: 2026/04/07 19:14:37 by ckurtul          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_uns_putnbr(unsigned int b)
+int	ft_uns_putnbr(unsigned int b)
 {
-	int count;
-	int check;
+	int	count;
+	int	check;
 
 	count = 0;
 	if (b >= 10)
