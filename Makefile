@@ -7,11 +7,11 @@ SRC	=	ft_printf.c			\
 		ft_putnbr.c			\
 		ft_putstr.c			\
 		ft_uns_putnbr.c		\
-		ft_uphex_putnbr.c	\
+		ft_uphex_putnbr.c
 
 OBJS = $(SRC:.c=.o)
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 AR = ar crs

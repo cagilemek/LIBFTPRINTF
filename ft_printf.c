@@ -35,22 +35,42 @@ static int	ft_format(char f, va_list args)
 	return (-1);
 }
 
+static int	ft_handle_percent(const char **fmt, va_list args, int *count)
+{
+	int	tmp;
+
+	(*fmt)++;
+	if (!**fmt)
+		return (-1);
+	tmp = ft_format(**fmt, args);
+	if (tmp == -1)
+	{
+		*count += ft_putchar('%');
+		*count += ft_putchar(**fmt);
+	}
+	else
+		*count += tmp;
+	return (1);
+}
+
 int	ft_printf(const char *fmt, ...)
 {
 	va_list	args;
 	int		count;
-	int		tmp;
 
-	va_start (args, fmt);
+	if (!fmt)
+		return (-1);
 	count = 0;
+	va_start(args, fmt);
 	while (*fmt)
 	{
 		if (*fmt == '%')
 		{
-			fmt++;
-			tmp = ft_format(*fmt, args);
-			if (tmp >= 0)
-				count += tmp;
+			if (ft_handle_percent(&fmt, args, &count) == -1)
+			{
+				va_end(args);
+				return (-1);
+			}
 		}
 		else
 			count += ft_putchar(*fmt);
